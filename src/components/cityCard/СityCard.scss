@@ -1,9 +1,9 @@
-.cityCardContainer {
+.CityCard-Container {
   display: flex;
   flex-direction: column;
   width: 824px;
   align-self: center;
-  margin-top: 20px;
+  margin: 20px;
 
   border: 1px solid #ffffff;
   border-radius: 6px;
@@ -12,12 +12,12 @@
   font-family: 'Lato';
   font-style: normal;
 
-  .dividingLine {
+  .CityCard-DividingLine {
     border: 1px solid #c4c4c4;
     margin: 0 24px;
   }
 
-  .cityName {
+  .CityCard-CityName {
     margin: 24px 24px 0 24px;
     font-weight: 700;
     font-size: 32px;
@@ -25,7 +25,7 @@
     color: #1b1b1b;
   }
 
-  .cityCardDescription {
+  .CityCard-Description {
     margin: 15px 24px 0 24px;
     font-weight: 400;
     font-size: 18px;
@@ -33,14 +33,14 @@
     color: #1b1b1b;
   }
 
-  .conditionContainer {
+  .CityCard-Condition_container {
     display: flex;
     justify-content: space-between;
     align-content: center;
     margin: 40px 24px 12px 24px;
 
-    .conditionCaption,
-    .conditionText {
+    .CityCard-Condition_caption,
+    .CityCard-Condition_text {
       font-weight: 400;
       font-size: 18px;
       line-height: 24px;
@@ -48,14 +48,14 @@
     }
   }
 
-  .temperatureContainer {
+  .CityCard-Temperature_container {
     display: flex;
     justify-content: space-between;
     align-content: center;
     margin: 16px 24px 12px 24px;
 
-    .temperatureCaption,
-    .temperatureText {
+    .CityCard-Temperature_caption,
+    .CityCard-Temperature_text {
       font-weight: 400;
       font-size: 18px;
       line-height: 24px;
@@ -63,14 +63,14 @@
     }
   }
 
-  .humidityContainer {
+  .CityCard-Humidity_container {
     display: flex;
     justify-content: space-between;
     align-content: center;
     margin: 16px 24px 12px 24px;
 
-    .humidityCaption,
-    .humidityText {
+    .CityCard-Humidity_caption,
+    .CityCard-Humidity_text {
       font-weight: 400;
       font-size: 18px;
       line-height: 24px;
@@ -78,7 +78,7 @@
     }
   }
 
-  .lastUpdateTime {
+  .CityCard-LastUpdateTime {
     align-self: flex-end;
     margin: 8px 24px 0 0;
     font-size: 16px;
@@ -87,16 +87,31 @@
     color: #a8a8a8;
   }
 
-  .buttonsContainer {
+  .CityCard-Buttons_container {
     display: flex;
     justify-content: space-between;
     align-content: center;
     margin: 32px 24px 24px 24px;
+
+    .CityCard-Button_remove,
+    .CityCard-Button_reload {
+      border: none;
+      background-color: inherit;
+      font-size: 16px;
+      line-height: 24px;
+      text-align: right;
+      font-weight: 700;
+      color: #9b51e0;
+    }
+    .CityCard-Button_remove:active,
+    .CityCard-Button_reload:active {
+      color: #a8a8a8;
+    }
   }
 }
 
 @media screen and (width < 825px) {
-  .cityCardContainer {
+  .CityCard-Container {
     width: 98%;
   }
 }

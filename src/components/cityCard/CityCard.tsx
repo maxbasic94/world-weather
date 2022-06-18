@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import moment from 'moment';
+import React, { useState } from 'react';
+import { UpdateTime } from '../updateTime/cityCard/UpdateTime';
 import { Current, Location } from '../../types/types';
 import './СityCard.scss';
 
@@ -12,49 +12,46 @@ interface CityCardProps {
 }
 
 export const CityCard: React.FC<CityCardProps> = ({ isCurrent, weatherData }): JSX.Element => {
-  const [lastUpdateTime, setLastUpdateTime] = useState({ hours: 0, minutes: 0 });
-  const initialTime = moment();
-  console.log(lastUpdateTime);
+  const [refreshTime, setRefreshTime] = useState(new Date());
+  const [time, setTime] = useState({ hours: 0, minutes: 0 });
 
-  useEffect(() => {
-    setTimeout((): void => {
-      const totalMinute = Math.round(moment().diff(initialTime) / (1000 * 60));
-      setLastUpdateTime({ hours: Math.floor(totalMinute / 60), minutes: totalMinute % 60 });
-    }, 60000);
-  }, [initialTime]);
+  const handleReloadClick = (): void => {
+    setRefreshTime(new Date());
+    setTime({ hours: 0, minutes: 0 });
+  };
 
   return (
-    <div className="cityCardContainer">
-      <div className="cityName">
+    <div className="CityCard-Container">
+      <div className="CityCard-CityName">
         {weatherData?.location.name}, {weatherData?.location.country}
       </div>
-      <div className="cityCardDescription">Your current location</div>
-      <div className="conditionContainer">
-        <div className="conditionCaption">Weather</div>
-        <div className="conditionText">{weatherData?.current.condition.text}</div>
+      <div className="CityCard-Description">Your current location</div>
+      <div className="CityCard-Condition_container">
+        <div className="CityCard-Condition_caption">Weather</div>
+        <div className="CityCard-Condition_text">{weatherData?.current.condition.text}</div>
       </div>
-      <hr className="dividingLine" />
-      <div className="temperatureContainer">
-        <div className="temperatureCaption">Temperature</div>
-        <div className="temperatureText">{weatherData?.current.temp_c}°C</div>
+      <hr className="CityCard-DividingLine" />
+      <div className="CityCard-Temperature_container">
+        <div className="CityCard-Temperature_caption">Temperature</div>
+        <div className="CityCard-Temperature_text">{weatherData?.current.temp_c}°C</div>
       </div>
-      <hr className="dividingLine" />
-      <div className="humidityContainer">
-        <div className="humidityCaption">Humidity</div>
-        <div className="humidityText">{weatherData?.current.humidity}%</div>
+      <hr className="CityCard-DividingLine" />
+      <div className="CityCard-Humidity_container">
+        <div className="huCityCard-Humidity_caption">Humidity</div>
+        <div className="CityCard-Humidity_Text">{weatherData?.current.humidity}%</div>
       </div>
-      <hr className="dividingLine" />
-      <div className="lastUpdateTime">
-        {lastUpdateTime.hours > 0
-          ? lastUpdateTime.hours + ' hours '
-          : lastUpdateTime.minutes + ' minutes '}
-        ago
-      </div>
-      <div className="buttonsContainer">
-        <button className="removeButton" style={{ visibility: isCurrent ? 'hidden' : 'visible' }}>
+      <hr className="CityCard-DividingLine" />
+      <UpdateTime refreshTime={refreshTime} time={time} setTime={setTime} />
+      <div className="CityCard-Buttons_container">
+        <button
+          className="CityCard-Button_remove"
+          style={{ visibility: isCurrent ? 'hidden' : 'visible' }}
+        >
           remove
         </button>
-        <button className="reloadButton">reload</button>
+        <button onClick={handleReloadClick} className="CityCard-Button_reload">
+          reload
+        </button>
       </div>
     </div>
   );
