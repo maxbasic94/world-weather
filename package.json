@@ -1,5 +1,4 @@
 {
-  "author": "Maksim Ashmiana",
   "name": "world-weather",
   "version": "0.1.0",
   "private": true,
@@ -11,6 +10,7 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "moment": "^2.29.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -28,6 +28,11 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 100,
+    "endOfLine": "auto"
   },
   "browserslist": {
     "production": [
@@ -47,26 +52,11 @@
     "@typescript-eslint/parser": "^5.28.0",
     "eslint": "^8.17.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.30.0",
     "node-sass": "^7.0.1",
     "prettier": "^2.7.1",
     "sass": "^1.52.3"
-  },
-  "cspell": {
-    "version": "0.2",
-    "ignorePaths": [],
-    "dictionaryDefinitions": [],
-    "dictionaries": [],
-    "words": [],
-    "ignoreWords": [
-      "Maksim",
-      "Ashmiana",
-      "browserslist",
-      "styl",
-      "precommit",
-      "browserslist"
-    ],
-    "import": []
   }
 }

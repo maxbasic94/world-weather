@@ -1,0 +1,102 @@
+.cityCardContainer {
+  display: flex;
+  flex-direction: column;
+  width: 824px;
+  align-self: center;
+  margin-top: 20px;
+
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  box-shadow: 0px 2px 10px rgba(10, 10, 10, 0.25);
+
+  font-family: 'Lato';
+  font-style: normal;
+
+  .dividingLine {
+    border: 1px solid #c4c4c4;
+    margin: 0 24px;
+  }
+
+  .cityName {
+    margin: 24px 24px 0 24px;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 38px;
+    color: #1b1b1b;
+  }
+
+  .cityCardDescription {
+    margin: 15px 24px 0 24px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #1b1b1b;
+  }
+
+  .conditionContainer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 40px 24px 12px 24px;
+
+    .conditionCaption,
+    .conditionText {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      color: #1b1b1b;
+    }
+  }
+
+  .temperatureContainer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 16px 24px 12px 24px;
+
+    .temperatureCaption,
+    .temperatureText {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      color: #1b1b1b;
+    }
+  }
+
+  .humidityContainer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 16px 24px 12px 24px;
+
+    .humidityCaption,
+    .humidityText {
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 24px;
+      color: #1b1b1b;
+    }
+  }
+
+  .lastUpdateTime {
+    align-self: flex-end;
+    margin: 8px 24px 0 0;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: right;
+    color: #a8a8a8;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 32px 24px 24px 24px;
+  }
+}
+
+@media screen and (width < 825px) {
+  .cityCardContainer {
+    width: 98%;
+  }
+}
