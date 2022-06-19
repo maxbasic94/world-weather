@@ -1,9 +1,11 @@
-import moment from 'moment';
 import React, { useEffect } from 'react';
+
+import moment from 'moment';
+
 import './UpdateTime.scss';
 
 interface UpdateTimeProps {
-  refreshTime: Date;
+  refreshTime: moment.Moment;
   time: { hours: number; minutes: number };
   setTime: React.Dispatch<
     React.SetStateAction<{
@@ -27,7 +29,7 @@ export const UpdateTime: React.FC<UpdateTimeProps> = ({
   }, [refreshTime, setTime]);
 
   return (
-    <div className="CityCard-LastUpdateTime">
+    <div className="LastUpdateTime">
       {time.hours > 0 ? time.hours + ' hours ' : time.minutes + ' minutes '}
       ago
     </div>

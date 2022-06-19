@@ -1,31 +1,49 @@
-import React, { useState } from 'react';
-import { UpdateTime } from '../updateTime/cityCard/UpdateTime';
+import React, { useEffect, useState } from 'react';
+
+import moment from 'moment';
+
+import { getWeatherData } from '../../helpers/getWeatherData';
+import { UpdateTime } from '../updateTime/UpdateTime';
 import { Current, Location } from '../../types/types';
+
 import './СityCard.scss';
 
 interface CityCardProps {
-  isCurrent?: boolean;
-  weatherData: {
-    location: Location;
-    current: Current;
-  } | null;
+  isCurrent: boolean;
+  cityName?: string;
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ isCurrent, weatherData }): JSX.Element => {
-  const [refreshTime, setRefreshTime] = useState(new Date());
+export const CityCard: React.FC<CityCardProps> = ({ isCurrent, cityName }): JSX.Element => {
+  const [refreshTime, setRefreshTime] = useState(moment());
   const [time, setTime] = useState({ hours: 0, minutes: 0 });
+  const [weatherData, setWeatherData] = useState<{
+    location: Location;
+    current: Current;
+  } | null>(null);
+  const url = isCurrent
+    ? `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=auto:ip&aqi=no&alerts=no`
+    : `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${cityName}&aqi=no`;
 
-  const handleReloadClick = (): void => {
-    setRefreshTime(new Date());
+  useEffect(() => {
+    async () => {
+      setWeatherData(await getWeatherData(url));
+    };
+  }, [url]);
+
+  const handleReloadClick = async (): Promise<void> => {
+    setRefreshTime(moment());
     setTime({ hours: 0, minutes: 0 });
+    setWeatherData(await getWeatherData(url));
   };
 
   return (
     <div className="CityCard-Container">
       <div className="CityCard-CityName">
-        {weatherData?.location.name}, {weatherData?.location.country}
+        {weatherData?.location.name}, {isCurrent ? weatherData?.location.country : ''}
       </div>
-      <div className="CityCard-Description">Your current location</div>
+      <div className="CityCard-Location">
+        {isCurrent ? 'Your current location' : weatherData?.location.country}
+      </div>
       <div className="CityCard-Condition_container">
         <div className="CityCard-Condition_caption">Weather</div>
         <div className="CityCard-Condition_text">{weatherData?.current.condition.text}</div>

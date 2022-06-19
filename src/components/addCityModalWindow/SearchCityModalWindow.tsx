@@ -5,6 +5,7 @@ import './SearchCityModalWindow.scss';
 interface SearchCityModalWindowProps {
   open: boolean;
   onClose: Dispatch<SetStateAction<boolean>>;
+  setCitiesLits?: Dispatch<React.SetStateAction<string[]>>;
 }
 
 async function getSimilarCities(searchCity: string) {
