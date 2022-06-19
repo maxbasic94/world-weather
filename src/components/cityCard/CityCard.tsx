@@ -12,10 +12,15 @@ interface CityCardProps {
   isCurrent: boolean;
   cityName?: string;
   citiesList?: string[];
-  setCitiesLits?: Dispatch<React.SetStateAction<string[]>>;
+  setCitiesList?: Dispatch<React.SetStateAction<string[]>>;
 }
 
-export const CityCard: React.FC<CityCardProps> = ({ isCurrent, cityName }): JSX.Element => {
+export const CityCard: React.FC<CityCardProps> = ({
+  isCurrent,
+  cityName,
+  citiesList,
+  setCitiesList,
+}): JSX.Element => {
   const [refreshTime, setRefreshTime] = useState(moment());
   const [time, setTime] = useState({ hours: 0, minutes: 0 });
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
@@ -28,10 +33,14 @@ export const CityCard: React.FC<CityCardProps> = ({ isCurrent, cityName }): JSX.
     getWeatherData(url).then((data) => setWeatherData(data));
   }, [url]);
 
-  const handleReloadClick = async (): Promise<void> => {
+  const handleOnClickReload = async (): Promise<void> => {
     setRefreshTime(moment());
     setTime({ hours: 0, minutes: 0 });
     setWeatherData(await getWeatherData(url));
+  };
+
+  const handleOnClickRemove = () => {
+    setCitiesList && citiesList && setCitiesList(citiesList.filter((city) => city !== cityName));
   };
 
   return (
@@ -63,10 +72,11 @@ export const CityCard: React.FC<CityCardProps> = ({ isCurrent, cityName }): JSX.
         <button
           className="CityCard-Button_remove"
           style={{ visibility: isCurrent ? 'hidden' : 'visible' }}
+          onClick={handleOnClickRemove}
         >
           remove
         </button>
-        <button onClick={handleReloadClick} className="CityCard-Button_reload">
+        <button onClick={handleOnClickReload} className="CityCard-Button_reload">
           reload
         </button>
       </div>
