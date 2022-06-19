@@ -6,7 +6,7 @@ import { AnotherCitiesWeather } from './components/anotherCitiesWeather/AnotherC
 
 export const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
-  const [citiesList, setCitiesLits] = useState(['Minsk', 'Lida']);
+  const [citiesList, setCitiesLits] = useState<string[]>([]);
 
   const handleClickAddCity = () => {
     setIsOpen(true);
@@ -19,7 +19,12 @@ export const App: React.FC = (): JSX.Element => {
       <button className="Application-Button_addCity" onClick={handleClickAddCity}>
         +
       </button>
-      <SearchCityModalWindow open={isOpen} onClose={setIsOpen} setCitiesLits={setCitiesLits} />
+      <SearchCityModalWindow
+        open={isOpen}
+        onOpen={setIsOpen}
+        citiesList={citiesList}
+        setCitiesLits={setCitiesLits}
+      />
     </div>
   );
 };

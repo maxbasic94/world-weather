@@ -1,33 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 
 import moment from 'moment';
 
 import { getWeatherData } from '../../helpers/getWeatherData';
 import { UpdateTime } from '../updateTime/UpdateTime';
-import { Current, Location } from '../../types/types';
+import { WeatherDataType } from '../../types/types';
 
 import './СityCard.scss';
 
 interface CityCardProps {
   isCurrent: boolean;
   cityName?: string;
+  citiesList?: string[];
+  setCitiesLits?: Dispatch<React.SetStateAction<string[]>>;
 }
 
 export const CityCard: React.FC<CityCardProps> = ({ isCurrent, cityName }): JSX.Element => {
   const [refreshTime, setRefreshTime] = useState(moment());
   const [time, setTime] = useState({ hours: 0, minutes: 0 });
-  const [weatherData, setWeatherData] = useState<{
-    location: Location;
-    current: Current;
-  } | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
+
   const url = isCurrent
     ? `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=auto:ip&aqi=no&alerts=no`
     : `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${cityName}&aqi=no`;
 
   useEffect(() => {
-    async () => {
-      setWeatherData(await getWeatherData(url));
-    };
+    getWeatherData(url).then((data) => setWeatherData(data));
   }, [url]);
 
   const handleReloadClick = async (): Promise<void> => {
@@ -39,7 +37,8 @@ export const CityCard: React.FC<CityCardProps> = ({ isCurrent, cityName }): JSX.
   return (
     <div className="CityCard-Container">
       <div className="CityCard-CityName">
-        {weatherData?.location.name}, {isCurrent ? weatherData?.location.country : ''}
+        {weatherData?.location.name}
+        {isCurrent ? ', ' + weatherData?.location.country : ''}
       </div>
       <div className="CityCard-Location">
         {isCurrent ? 'Your current location' : weatherData?.location.country}

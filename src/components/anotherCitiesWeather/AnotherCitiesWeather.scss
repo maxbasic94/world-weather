@@ -1,0 +1,29 @@
+.AnotherCitiesWeather-Container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+
+  .CityCard-Container {
+    width: 20%;
+  }
+}
+
+@media screen and (width < 1200px) {
+  .AnotherCitiesWeather-Container {
+    .CityCard-Container {
+      width: 45%;
+    }
+  }
+}
+
+@media screen and (width < 845px) {
+  .AnotherCitiesWeather-Container {
+    margin: 0px;
+    .CityCard-Container {
+      width: 98%;
+      margin: 2px;
+    }
+  }
+}

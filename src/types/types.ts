@@ -38,3 +38,23 @@ export type Current = {
   gust_mph: number;
   gust_kph: number;
 };
+
+export type SearchCity = {
+  cases: null;
+  code: string;
+  coordinates: { lon: number; lat: number };
+  country_cases: null;
+  country_code: number;
+  country_name: number;
+  index_strings: string[];
+  main_airport_name: null;
+  name: string;
+  state_code: null;
+  type: string;
+  weight: number;
+};
+
+export type WeatherDataType = {
+  location: Location;
+  current: Current;
+};

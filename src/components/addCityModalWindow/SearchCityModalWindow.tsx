@@ -1,28 +1,27 @@
 import { ChangeEvent, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import ReactDom from 'react-dom';
+
+import { getSimilarCities } from '../../helpers/getSimilarCities';
+import { SearchCity } from '../../types/types';
+
 import './SearchCityModalWindow.scss';
 
 interface SearchCityModalWindowProps {
   open: boolean;
-  onClose: Dispatch<SetStateAction<boolean>>;
-  setCitiesLits?: Dispatch<React.SetStateAction<string[]>>;
+  onOpen: Dispatch<SetStateAction<boolean>>;
+  citiesList: string[];
+  setCitiesLits: Dispatch<React.SetStateAction<string[]>>;
 }
-
-async function getSimilarCities(searchCity: string) {
-  const response = await fetch(
-    `https://autocomplete.travelpayouts.com/places2?term=${searchCity}&locale=en&types[]=city&callback=json`,
-    { mode: 'cors' }
-  );
-  if (response.status == 200) {
-    const text = await response.text();
-    return JSON.parse(text.slice(5).slice(0, -2));
-  }
-}
-
-export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({ open, onClose }) => {
+export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({
+  open,
+  onOpen,
+  citiesList,
+  setCitiesLits,
+}) => {
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
   const [isCyrillic, setIsCyrillic] = useState(false);
+  const [isWrongCity, setIsWrongCity] = useState(false);
 
   useEffect(() => {
     open && setInputError(false);
@@ -32,7 +31,6 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({ op
     setInputValue(event.target.value);
     setIsCyrillic(/[а-я]/i.test(event.target.value));
     event.target.value.length > 0 && !isCyrillic ? setInputError(false) : setInputError(true);
-    console.log(test);
   };
 
   const handleOnClickClear = () => {
@@ -41,14 +39,24 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({ op
   };
 
   const handleOnClickCancel = () => {
-    onClose(false);
+    onOpen(false);
   };
 
   const handleOnClickAdd = async () => {
-    const isCityExists = await getSimilarCities(inputValue);
-    isCityExists.forEach((city: { name: string }) => {
-      city.name === inputValue;
-      console.log(true);
+    getSimilarCities(inputValue).then((cityExistsList: SearchCity[]) => {
+      if (cityExistsList[0].name.toLocaleLowerCase() !== inputValue.toLocaleLowerCase()) {
+        setIsWrongCity(true);
+        setInputError(true);
+      } else {
+        setIsWrongCity(false);
+        setInputError(false);
+        if (citiesList.includes(inputValue)) {
+          onOpen(false);
+        } else {
+          setCitiesLits((prev) => [...prev, inputValue.toLocaleLowerCase()]);
+          onOpen(false);
+        }
+      }
     });
   };
 
@@ -63,7 +71,7 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({ op
           </div>
           <div className="Modal-InputContainer">
             <input
-              className="Modal-Input_searchCity"
+              className={inputError ? 'Modal-Input_searchCity_error' : 'Modal-Input_searchCity'}
               type="text"
               placeholder="Search city"
               value={inputValue}
@@ -71,7 +79,7 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({ op
             />
           </div>
           <div className={inputError ? 'Modal-InputDescription_error' : 'Modal-InputDescription '}>
-            {isCyrillic ? 'choose language' : 'choose a city'}
+            {isCyrillic ? 'choose language' : isWrongCity ? 'unknown city' : 'choose a city'}
           </div>
           <div className="Modal-ButtonsContainer">
             <div className="Modal-ButtonClear_container">

@@ -58,6 +58,19 @@
     padding-block-end: 16px;
   }
 
+  .Modal-Input_searchCity_error {
+    width: 100%;
+    outline: 0;
+    border: 1px solid #FF0101;
+    border-width: 0 0 1px;
+
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 24px;
+    color: #1b1b1b;
+    padding-block-end: 16px;
+  }
+
   .Modal-Input_searchCity::placeholder {
     font-weight: 500;
     font-size: 24px;
