@@ -26,8 +26,8 @@ export const CityCard: React.FC<CityCardProps> = ({
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
 
   const url = isCurrent
-    ? `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=auto:ip&aqi=no&alerts=no`
-    : `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${cityName}&aqi=no`;
+    ? `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=auto:ip&aqi=no&alerts=no`
+    : `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${cityName}&aqi=no`;
 
   useEffect(() => {
     getWeatherData(url).then((data) => setWeatherData(data));
