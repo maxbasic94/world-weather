@@ -1,0 +1,120 @@
+.Modal-Container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 397px;
+  width: 751px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  z-index: 1000;
+  font-family: 'Lato';
+  font-style: normal;
+  border-radius: 4px;
+  box-shadow: 0px 16px 24px rgba(0, 0, 0, 0.14), 0px 6px 30px rgba(0, 0, 0, 0.12),
+    0px 8px 10px rgba(0, 0, 0, 0.2);
+}
+
+.Modal-Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+}
+
+.Modal-Caption {
+  margin: 24px 24px 0 24px;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 38px;
+  color: #1b1b1b;
+}
+
+.Modal-Description {
+  margin: 16px 24px 0 24px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  color: #767676;
+}
+
+.Modal-InputContainer {
+  margin: 67px 24px 0 24px;
+
+  .Modal-Input_searchCity {
+    width: 100%;
+    outline: 0;
+    border: 1px solid #c4c4c4;
+    border-width: 0 0 1px;
+
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 24px;
+    color: #1b1b1b;
+    padding-block-end: 16px;
+  }
+
+  .Modal-Input_searchCity::placeholder {
+    font-weight: 500;
+    font-size: 24px;
+    color: #c1c1c1;
+  }
+}
+
+.Modal-InputDescription {
+  margin: 12px 24px 0 24px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ff0101;
+  visibility: hidden;
+}
+
+.Modal-InputDescription_error {
+  visibility: visible;
+  margin: 12px 24px 0 24px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ff0101;
+}
+
+.Modal-ButtonsContainer {
+  margin: 80px 24px 24px 24px;
+  display: flex;
+  justify-content: space-between;
+
+  .Modal-Button_clear,
+  .Modal-Button_cancel,
+  .Modal-Button_add {
+    border: none;
+    background-color: inherit;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+  .Modal-Button_clear,
+  .Modal-Button_add {
+    color: #c1c1c1;
+  }
+  .Modal-Button_cancel {
+    color: #9b51e0;
+  }
+
+  .Modal-Button_clear:active,
+  .Modal-Button_cancel:active,
+  .Modal-Button_add:active {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (width<780px) {
+  .Modal-Container {
+    width: 98%;
+    height: max-content;
+  }
+}

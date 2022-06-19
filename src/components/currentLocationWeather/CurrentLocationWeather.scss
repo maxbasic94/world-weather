@@ -1,10 +1,10 @@
-.currentLocationContainer {
+.CurrentLocationWeather-Container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  .currentLocationCaption {
+  .CurrentLocationWeather-Caption {
     text-align: center;
     font-family: 'Lato';
     font-style: normal;
@@ -14,7 +14,7 @@
     line-height: 80px;
     color: #1b1b1b;
   }
-  .currentLocationDescription {
+  .CurrentLocationWeather-Description {
     text-align: center;
     font-family: 'Lato';
     font-style: normal;

@@ -19,9 +19,11 @@ export const CurrentLocationWeather: React.FC = (): JSX.Element => {
   }, [url]);
 
   return (
-    <div className="currentLocationContainer">
-      <div className="currentLocationCaption">World Weather</div>
-      <div className="currentLocationDescription">Watch weather in your current location</div>
+    <div className="CurrentLocationWeather-Container">
+      <div className="CurrentLocationWeather-Caption">World Weather</div>
+      <div className="CurrentLocationWeather-Description">
+        Watch weather in your current location
+      </div>
       <CityCard isCurrent={true} weatherData={currentLocationData} />
     </div>
   );
