@@ -6,7 +6,7 @@ import { getWeatherData } from '../../helpers/getWeatherData';
 import { UpdateTime } from '../UpdateTime/UpdateTime';
 import { WeatherDataType } from '../../types/types';
 
-import './СityCard.scss';
+import './CityCard.scss';
 import { WEATHER_API_BASE } from '../../shared/constants';
 
 interface CityCardProps {

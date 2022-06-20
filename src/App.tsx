@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CurrentLocationWeather } from './components/CurrentLocationWeather/CurrentLocationWeather';
 import './App.scss';
-import { SearchCityModalWindow } from './components/AddCityModalWindow/SearchCityModalWindow';
+import { SearchCityModalWindow } from './components/AddCityModalWindow/AddCityModalWindow';
 import { AnotherCitiesWeather } from './components/AnotherCitiesWeather/AnotherCitiesWeather';
 
 export const App: React.FC = (): JSX.Element => {

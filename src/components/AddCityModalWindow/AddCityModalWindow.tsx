@@ -4,7 +4,7 @@ import ReactDom from 'react-dom';
 import { getSimilarCities } from '../../helpers/getSimilarCities';
 import { SearchCity } from '../../types/types';
 
-import './SearchCityModalWindow.scss';
+import './AddCityModalWindow.scss';
 
 interface SearchCityModalWindowProps {
   open: boolean;
