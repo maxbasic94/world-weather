@@ -1,5 +1,5 @@
 import React from 'react';
-import { CityCard } from '../cityCard/CityCard';
+import { CityCard } from '../CityCard/CityCard';
 import './CurrentLocationWeather.scss';
 
 export const CurrentLocationWeather: React.FC = (): JSX.Element => {

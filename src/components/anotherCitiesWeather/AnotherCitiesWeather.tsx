@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { CityCard } from '../cityCard/CityCard';
+import { CityCard } from '../CityCard/CityCard';
 import './AnotherCitiesWeather.scss';
 
 interface AnotherCitiesWeatherProps {
@@ -13,7 +13,7 @@ export const AnotherCitiesWeather: React.FC<AnotherCitiesWeatherProps> = ({
 }): JSX.Element => {
   return (
     <div className="AnotherCitiesWeather-Container">
-      {citiesList?.map((city) => (
+      {citiesList.map((city) => (
         <CityCard
           key={city}
           isCurrent={false}

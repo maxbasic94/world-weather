@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { CurrentLocationWeather } from './components/currentLocationWeather/CurrentLocationWeather';
+import { CurrentLocationWeather } from './components/CurrentLocationWeather/CurrentLocationWeather';
 import './App.scss';
-import { SearchCityModalWindow } from './components/addCityModalWindow/SearchCityModalWindow';
-import { AnotherCitiesWeather } from './components/anotherCitiesWeather/AnotherCitiesWeather';
+import { SearchCityModalWindow } from './components/AddCityModalWindow/SearchCityModalWindow';
+import { AnotherCitiesWeather } from './components/AnotherCitiesWeather/AnotherCitiesWeather';
 
 export const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +23,7 @@ export const App: React.FC = (): JSX.Element => {
         open={isOpen}
         onOpen={setIsOpen}
         citiesList={citiesList}
-        setCitiesLits={setCitiesList}
+        setCitiesList={setCitiesList}
       />
     </div>
   );

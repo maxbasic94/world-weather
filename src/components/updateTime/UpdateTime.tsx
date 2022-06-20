@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { SetStateAction, useEffect } from 'react';
 
 import moment from 'moment';
 
+import { INTERVAL_TIME } from '../../shared/constants';
 import './UpdateTime.scss';
 
 interface UpdateTimeProps {
   refreshTime: moment.Moment;
   time: { hours: number; minutes: number };
   setTime: React.Dispatch<
-    React.SetStateAction<{
+    SetStateAction<{
       hours: number;
       minutes: number;
     }>
@@ -24,7 +25,7 @@ export const UpdateTime: React.FC<UpdateTimeProps> = ({
     const interval = setInterval(() => {
       const totalMinute = moment().diff(moment(refreshTime), 'minutes');
       setTime({ hours: Math.floor(totalMinute / 60), minutes: totalMinute % 60 });
-    }, 60000);
+    }, INTERVAL_TIME);
     return () => clearInterval(interval);
   }, [refreshTime, setTime]);
 

@@ -1,3 +1,5 @@
+@import '../../shared/colors.scss';
+
 .Modal-Container {
   overflow-y: scroll;
   overflow-x: hidden;
@@ -31,7 +33,7 @@
   font-weight: 700;
   font-size: 32px;
   line-height: 38px;
-  color: #1b1b1b;
+  color: $primaryTextColor;
 }
 
 .Modal-Description {
@@ -39,7 +41,7 @@
   font-weight: 400;
   font-size: 24px;
   line-height: 24px;
-  color: #767676;
+  color: $secondaryTextColor;
 }
 
 .Modal-InputContainer {
@@ -48,26 +50,26 @@
   .Modal-Input_searchCity {
     width: 100%;
     outline: 0;
-    border: 1px solid #c4c4c4;
+    border: 1px solid $lineColor;
     border-width: 0 0 1px;
 
     font-weight: 500;
     font-size: 24px;
     line-height: 24px;
-    color: #1b1b1b;
+    color: lightBackground;
     padding-block-end: 16px;
   }
 
   .Modal-Input_searchCity_error {
     width: 100%;
     outline: 0;
-    border: 1px solid #FF0101;
+    border: 1px solid $errorColor;
     border-width: 0 0 1px;
 
     font-weight: 500;
     font-size: 24px;
     line-height: 24px;
-    color: #1b1b1b;
+    color: $primaryTextColor;
     padding-block-end: 16px;
   }
 
@@ -83,7 +85,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ff0101;
+  color: $errorColor;
   visibility: hidden;
 }
 
@@ -93,7 +95,7 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #ff0101;
+  color: $errorColor;
 }
 
 .Modal-ButtonsContainer {
@@ -112,10 +114,10 @@
   }
   .Modal-Button_clear,
   .Modal-Button_add {
-    color: #c1c1c1;
+    color: $greyButton;
   }
   .Modal-Button_cancel {
-    color: #9b51e0;
+    color: $purpleButton;
   }
 
   .Modal-Button_clear:active,

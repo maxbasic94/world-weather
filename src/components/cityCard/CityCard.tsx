@@ -3,10 +3,11 @@ import React, { Dispatch, useEffect, useState } from 'react';
 import moment from 'moment';
 
 import { getWeatherData } from '../../helpers/getWeatherData';
-import { UpdateTime } from '../updateTime/UpdateTime';
+import { UpdateTime } from '../UpdateTime/UpdateTime';
 import { WeatherDataType } from '../../types/types';
 
 import './СityCard.scss';
+import { WEATHER_API_BASE } from '../../shared/constants';
 
 interface CityCardProps {
   isCurrent: boolean;
@@ -26,21 +27,28 @@ export const CityCard: React.FC<CityCardProps> = ({
   const [weatherData, setWeatherData] = useState<WeatherDataType | null>(null);
 
   const url = isCurrent
-    ? `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=auto:ip&aqi=no&alerts=no`
-    : `https://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${cityName}&aqi=no`;
+    ? `${WEATHER_API_BASE}${process.env.REACT_APP_API_KEY}&q=auto:ip&aqi=no&alerts=no`
+    : `${WEATHER_API_BASE}${process.env.REACT_APP_API_KEY}&q=${cityName}&aqi=no`;
 
   useEffect(() => {
-    getWeatherData(url).then((data) => setWeatherData(data));
+    (async () => {
+      const currentWeatherData = await getWeatherData(url);
+      setWeatherData(currentWeatherData);
+    })();
   }, [url]);
 
   const handleOnClickReload = async (): Promise<void> => {
+    const currentWeatherData = await getWeatherData(url);
     setRefreshTime(moment());
     setTime({ hours: 0, minutes: 0 });
-    setWeatherData(await getWeatherData(url));
+    setWeatherData(currentWeatherData);
   };
 
   const handleOnClickRemove = () => {
-    setCitiesList && citiesList && setCitiesList(citiesList.filter((city) => city !== cityName));
+    if (setCitiesList && citiesList) {
+      const filteredCitiesArray = citiesList.filter((city) => city !== cityName);
+      setCitiesList(filteredCitiesArray);
+    }
   };
 
   return (
@@ -70,8 +78,7 @@ export const CityCard: React.FC<CityCardProps> = ({
       <UpdateTime refreshTime={refreshTime} time={time} setTime={setTime} />
       <div className="CityCard-Buttons_container">
         <button
-          className="CityCard-Button_remove"
-          style={{ visibility: isCurrent ? 'hidden' : 'visible' }}
+          className={isCurrent ? 'CityCard-Button_remove_hidden' : 'CityCard-Button_remove_visible'}
           onClick={handleOnClickRemove}
         >
           remove

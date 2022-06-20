@@ -10,13 +10,13 @@ interface SearchCityModalWindowProps {
   open: boolean;
   onOpen: Dispatch<SetStateAction<boolean>>;
   citiesList: string[];
-  setCitiesLits: Dispatch<React.SetStateAction<string[]>>;
+  setCitiesList: Dispatch<React.SetStateAction<string[]>>;
 }
 export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({
   open,
   onOpen,
   citiesList,
-  setCitiesLits,
+  setCitiesList: setCitiesLits,
 }) => {
   const [inputValue, setInputValue] = useState('');
   const [inputError, setInputError] = useState(false);
@@ -43,62 +43,65 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({
   };
 
   const handleOnClickAdd = async () => {
-    getSimilarCities(inputValue).then((cityExistsList: SearchCity[]) => {
-      if (cityExistsList[0].name.toLocaleLowerCase() !== inputValue.toLocaleLowerCase()) {
-        setIsWrongCity(true);
-        setInputError(true);
-      } else {
-        setIsWrongCity(false);
-        setInputError(false);
-        if (citiesList.includes(inputValue)) {
-          onOpen(false);
-        } else {
-          setCitiesLits((prev) => [...prev, inputValue.toLocaleLowerCase()]);
-          onOpen(false);
-        }
-      }
-    });
+    const cityExistsList: SearchCity[] = await getSimilarCities(inputValue);
+
+    if (cityExistsList[0].name.toLocaleLowerCase() !== inputValue.toLocaleLowerCase()) {
+      setIsWrongCity(true);
+      setInputError(true);
+      return;
+    }
+
+    setIsWrongCity(false);
+    setInputError(false);
+
+    if (!citiesList.includes(inputValue)) {
+      setCitiesLits((prev) => [...prev, inputValue.toLocaleLowerCase()]);
+    }
+    setInputValue('');
+    onOpen(false);
   };
 
+  if (!open) {
+    return null;
+  }
+
   return ReactDom.createPortal(
-    !open ? null : (
-      <>
-        <div className="Modal-Overlay" />
-        <div className="Modal-Container">
-          <div className="Modal-Caption">Choose a city</div>
-          <div className="Modal-Description">
-            To find city start typing and pick one from the suggestions
+    <>
+      <div className="Modal-Overlay" />
+      <div className="Modal-Container">
+        <div className="Modal-Caption">Choose a city</div>
+        <div className="Modal-Description">
+          To find city start typing and pick one from the suggestions
+        </div>
+        <div className="Modal-InputContainer">
+          <input
+            className={inputError ? 'Modal-Input_searchCity_error' : 'Modal-Input_searchCity'}
+            type="text"
+            placeholder="Search city"
+            value={inputValue}
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className={inputError ? 'Modal-InputDescription_error' : 'Modal-InputDescription '}>
+          {isCyrillic ? 'choose language' : isWrongCity ? 'unknown city' : 'choose a city'}
+        </div>
+        <div className="Modal-ButtonsContainer">
+          <div className="Modal-ButtonClear_container">
+            <button className="Modal-Button_clear" onClick={handleOnClickClear}>
+              CLEAR
+            </button>
           </div>
-          <div className="Modal-InputContainer">
-            <input
-              className={inputError ? 'Modal-Input_searchCity_error' : 'Modal-Input_searchCity'}
-              type="text"
-              placeholder="Search city"
-              value={inputValue}
-              onChange={handleOnChange}
-            />
-          </div>
-          <div className={inputError ? 'Modal-InputDescription_error' : 'Modal-InputDescription '}>
-            {isCyrillic ? 'choose language' : isWrongCity ? 'unknown city' : 'choose a city'}
-          </div>
-          <div className="Modal-ButtonsContainer">
-            <div className="Modal-ButtonClear_container">
-              <button className="Modal-Button_clear" onClick={handleOnClickClear}>
-                CLEAR
-              </button>
-            </div>
-            <div className="Modal-ButtonCancelAndAdd_container">
-              <button className="Modal-Button_cancel" onClick={handleOnClickCancel}>
-                CANCEL
-              </button>
-              <button className="Modal-Button_add" onClick={handleOnClickAdd}>
-                ADD
-              </button>
-            </div>
+          <div className="Modal-ButtonCancelAndAdd_container">
+            <button className="Modal-Button_cancel" onClick={handleOnClickCancel}>
+              CANCEL
+            </button>
+            <button className="Modal-Button_add" onClick={handleOnClickAdd}>
+              ADD
+            </button>
           </div>
         </div>
-      </>
-    ),
+      </div>
+    </>,
     document.querySelector('#portal') as HTMLElement
   );
 };
