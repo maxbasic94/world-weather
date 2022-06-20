@@ -28,8 +28,9 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({
   }, [open]);
 
   const handleOnChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const cyrillic = /[а-я]/i.test(event.target.value);
     setInputValue(event.target.value);
-    setIsCyrillic(/[а-я]/i.test(event.target.value));
+    setIsCyrillic(cyrillic);
     event.target.value.length > 0 && !isCyrillic ? setInputError(false) : setInputError(true);
   };
 
