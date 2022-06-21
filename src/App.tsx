@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { CurrentLocationWeather } from './components/CurrentLocationWeather/CurrentLocationWeather';
 import { SearchCityModalWindow } from './components/AddCityModalWindow/AddCityModalWindow';
 import { AnotherCitiesWeather } from './components/AnotherCitiesWeather/AnotherCitiesWeather';
+import { CurrentLocationWeather } from './components/CurrentLocationWeather/CurrentLocationWeather';
 
 import './App.scss';
 
