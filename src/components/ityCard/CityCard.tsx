@@ -3,7 +3,7 @@ import React, { Dispatch, useEffect, useState } from 'react';
 import moment from 'moment';
 
 import { getWeatherData } from '../../helpers/getWeatherData';
-import { UpdateTime } from '../UpdateTime/UpdateTime';
+import { UpdateTime } from '../pdateTime/UpdateTime';
 import { WeatherDataType } from '../../types/types';
 
 import './CityCard.scss';
