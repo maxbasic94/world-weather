@@ -81,10 +81,10 @@ export const CityCard: React.FC<CityCardProps> = ({
           className={isCurrent ? 'CityCard-Button_remove_hidden' : 'CityCard-Button_remove_visible'}
           onClick={handleOnClickRemove}
         >
-          remove
+          REMOVE
         </button>
         <button onClick={handleOnClickReload} className="CityCard-Button_reload">
-          reload
+          RELOAD
         </button>
       </div>
     </div>
