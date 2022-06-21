@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { CurrentLocationWeather } from './components/CurrentLocationWeather/CurrentLocationWeather';
-import './App.scss';
+
 import { SearchCityModalWindow } from './components/AddCityModalWindow/AddCityModalWindow';
 import { AnotherCitiesWeather } from './components/AnotherCitiesWeather/AnotherCitiesWeather';
+import { CurrentLocationWeather } from './components/CurrentLocationWeather/CurrentLocationWeather';
+
+import './App.scss';
 
 export const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
