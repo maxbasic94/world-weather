@@ -102,9 +102,9 @@
       line-height: 24px;
     }
 
-    .CityCard-Button_remove:active,
+    .CityCard-Button_remove_visible:active,
     .CityCard-Button_reload:active {
-      color: lightBackground;
+      color: $lightBackground;
     }
   }
 }
