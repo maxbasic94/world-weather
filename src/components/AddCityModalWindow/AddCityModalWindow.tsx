@@ -57,6 +57,7 @@ export const SearchCityModalWindow: React.FC<SearchCityModalWindowProps> = ({
 
     if (!citiesList.includes(inputValue)) {
       setCitiesLits((prev) => [...prev, inputValue.toLocaleLowerCase()]);
+      localStorage.setItem('citiesList', JSON.stringify([...citiesList, inputValue]));
     }
     setInputValue('');
     onOpen(false);

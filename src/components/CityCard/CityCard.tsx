@@ -48,6 +48,7 @@ export const CityCard: React.FC<CityCardProps> = ({
     if (setCitiesList && citiesList) {
       const filteredCitiesArray = citiesList.filter((city) => city !== cityName);
       setCitiesList(filteredCitiesArray);
+      localStorage.setItem('citiesList', JSON.stringify(filteredCitiesArray));
     }
   };
 

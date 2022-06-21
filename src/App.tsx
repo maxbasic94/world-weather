@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { SearchCityModalWindow } from './components/AddCityModalWindow/AddCityModalWindow';
 import { AnotherCitiesWeather } from './components/AnotherCitiesWeather/AnotherCitiesWeather';
@@ -9,6 +9,11 @@ import './App.scss';
 export const App: React.FC = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const [citiesList, setCitiesList] = useState<string[]>([]);
+
+  useEffect(() => {
+    const storageCities = localStorage.getItem('citiesList');
+    storageCities !== null && setCitiesList(JSON.parse(storageCities));
+  }, []);
 
   const handleClickAddCity = () => {
     setIsOpen(true);
