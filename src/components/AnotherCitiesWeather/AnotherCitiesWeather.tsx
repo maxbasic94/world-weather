@@ -1,5 +1,5 @@
 import React, { Dispatch } from 'react';
-import { CityCard } from '../ityCard/CityCard';
+import { CityCard } from '../CityCard/CityCard';
 import './AnotherCitiesWeather.scss';
 
 interface AnotherCitiesWeatherProps {
